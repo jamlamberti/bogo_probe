@@ -51,15 +51,3 @@ def get_logger(
     logger.addHandler(file_handler)
     logger.addHandler(stream_handler)
     return logger
-
-
-def test():
-    log1 = get_logger("test", "unit_test.log")
-    log1.debug("This message is a debug message")
-    log1.info("This message is an info message")
-    log1.warning("This is a warning message")
-    log1.error("This is an error message")
-    log1.critical("This is a critical message")
-
-if __name__ == "__main__":
-    test()
