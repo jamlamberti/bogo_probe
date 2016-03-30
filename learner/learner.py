@@ -1,5 +1,9 @@
 """Generic Learner Class"""
 
+from os.path import join, abspath
+
+from common import logger, config
+
 
 class Learner(object):
 
@@ -11,7 +15,18 @@ class Learner(object):
         """
         Initialize the classifier with whatever hyperparams you want
         """
-        pass
+
+        # I am currently throwing these logs into the log-dir
+        # (specified in the config file)
+        # It would probably be better to have test specific logging
+        # also placed into the results dir
+
+        logging_config = config.Section('logging')
+        self.log = logger.get_logger(
+            'learner',
+            join(
+                abspath(logging_config.get('log-dir')),
+                'learner.log'))
 
     def train(self, train_x, train_y):
         """
