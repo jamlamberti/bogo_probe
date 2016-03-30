@@ -15,16 +15,16 @@ class Learner(object):
         """
         Train the classifier
         """
-        raise NotImplemented()
+        raise NotImplemented
 
     def predict(x):
         """
         Return predicted class labels
         """
-        raise NotImplemented()
+        raise NotImplemented
 
     def predict_proba(x):
         """
         Return predicted probabilities
         """
-        raise NotImplemented()
+        raise NotImplemented
