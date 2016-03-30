@@ -5,9 +5,8 @@ python:
 sudo: required
 
 before_install:
-    - sudo apt-get -qq install -y python-numpy python-scipy python-sklearn
-    - pip install pytest pytest-cov codecov scipy --upgrade
-    - python -c "import scipy; print scipy.__version__"
+    - sudo apt-get -qq install -y liblapack-dev gfortran
+    - pip install pytest pytest-cov codecov
 
 install:
     - pip install -r requirements.txt
