@@ -1,6 +1,6 @@
 """An SVM implementation"""
 
-import sklearn
+import sklearn.svm
 
 from .learner import Learner
 
@@ -20,7 +20,7 @@ class SVM(Learner):
             self,
             kernel='linear',
             degree=3,
-            gamma='auto',
+            # gamma='auto',
             coef0=0.0,
     ):
         super(SVM, self).__init__()
@@ -28,15 +28,16 @@ class SVM(Learner):
         self.classifier = sklearn.svm.SVC(
             kernel=kernel,
             degree=degree,
-            gamma=gamma,
+            # gamma=gamma,
+            probability=True,
             coef0=coef0,
         )
         self.log.debug("Initialized an SVM classifier with:")
         self.log.debug(
-            '    kernel=%s, degree=%d, gamma=%s, coef0=%0.3f',
+            '    kernel=%s, degree=%d, coef0=%0.3f',
             kernel,
             degree,
-            gamma,
+            # gamma,
             coef0)
 
     def train(self, train_x, train_y):
@@ -61,3 +62,4 @@ class SVM(Learner):
         """
 
         self.log.info("Computing SVM probabilities")
+        return self.classifier.predict_proba(test_x)
