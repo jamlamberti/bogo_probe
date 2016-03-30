@@ -2,6 +2,7 @@ import pytest
 
 from common import util
 
+
 def test_util():
     import os
     import errno
@@ -13,4 +14,4 @@ def test_util():
     # Should fail?
     with pytest.raises(OSError) as err:
         util.make_dir('/storage')
-        assert err.errno ==  errno.EACCES
+        assert err.errno == errno.EACCES

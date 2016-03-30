@@ -1,6 +1,8 @@
 """Generic Learner Class"""
 
+
 class Learner(object):
+
     """
     A wrapper around all ML classes
     """
