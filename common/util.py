@@ -1,3 +1,5 @@
+"""A simple set of utilities"""
+
 import os
 import errno
 

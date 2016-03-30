@@ -19,13 +19,13 @@ class Learner(object):
         """
         raise NotImplementedError("Train method not implemented")
 
-    def predict(self, x):
+    def predict(self, test_x):
         """
         Return predicted class labels
         """
         raise NotImplementedError("Predict method not implemented")
 
-    def predict_proba(self, x):
+    def predict_proba(self, test_x):
         """
         Return predicted probabilities
         """
