@@ -15,16 +15,16 @@ class Learner(object):
         """
         Train the classifier
         """
-        raise NotImplemented
+        raise NotImplementedError("Train method not implemented")
 
     def predict(x):
         """
         Return predicted class labels
         """
-        raise NotImplemented
+        raise NotImplementedError("Predict method not implemented")
 
     def predict_proba(x):
         """
         Return predicted probabilities
         """
-        raise NotImplemented
+        raise NotImplementedError("Predict Probabilities not implemented")
