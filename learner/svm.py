@@ -13,14 +13,16 @@ from .learner import Learner
 
 
 class SVM(Learner):
+
     """SVM Wrapper"""
+
     def __init__(
             self,
             kernel='linear',
             degree=3,
             gamma='auto',
             coef0=0.0,
-        ):
+    ):
         super(SVM, self).__init__()
 
         self.classifier = sklearn.svm.SVC(

@@ -4,6 +4,7 @@ from os.path import join, abspath
 
 from common import logger, config
 
+
 class Learner(object):
 
     """
