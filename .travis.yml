@@ -5,8 +5,7 @@ python:
 sudo: required
 
 before_install:
-    - sudo apt-get -qq upgrade -y
-    -  sudo apt-get install -y python-numpy python-scipy python-sklearn
+    - sudo apt-get -qq install -y python-numpy python-scipy python-sklearn
     - pip install pytest pytest-cov codecov
 
 install:
