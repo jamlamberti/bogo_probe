@@ -8,7 +8,7 @@ import matplotlib.pyplot as plt
 def classifier_vis(truth, expected, thresh=0.02, out_file='out.png'):
     """truth is the black-box model, expected is the surrogate"""
     # slope, intercept, r_value, p_value, std_err
-    #= scipy.stats.linregress(truth, expected)
+    # = scipy.stats.linregress(truth, expected)
     slope, intercept, r_value, _, _ = scipy.stats.linregress(truth, expected)
     fig = plt.figure(figsize=(10, 10))
     ax = fig.add_subplot(1, 1, 1)

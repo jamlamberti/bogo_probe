@@ -12,6 +12,7 @@ def feature_vis(data, out_file='out.png'):
     heatmap = ax.pcolor(data)
     fig.colorbar(heatmap)
     fig.tight_layout()
+
     # save and clear
     plt.savefig(out_file)
     plt.clf()
