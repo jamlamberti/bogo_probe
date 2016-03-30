@@ -6,7 +6,8 @@ sudo: required
 
 before_install:
     - sudo apt-get -qq install -y liblapack-dev gfortran
-    - pip install pytest pytest-cov codecov
+    - pip install pytest pytest-cov codecov scipy --upgrade
+    - python -c "import scipy; print scipy.__version__"
 
 install:
     - pip install -r requirements.txt
