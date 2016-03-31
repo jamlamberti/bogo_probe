@@ -11,7 +11,7 @@ class NaiveBayes(learner):
     def __init__(self, alpha):
         super(NaiveBayes, self).__init__()
 
-        self.classifier() = GaussianNB()
+        self.classifier() = sklearn.naive_bayes.GaussianNB()
         self.log.debug("Naive Bayes classifier initialized.")
         #self.log.debug('    alpha=%s', alpha)
 
