@@ -1,25 +1,25 @@
 """An Naive Bayes Implementation"""
 
-import sklearn.naive_bayes import GaussianNB
+from sklearn.naive_bayes import GaussianNB
 
 from .learner import learner
 
 class NaiveBayes(learner):
 
-	"""Naive Bayes Wrapper"""
+    """Naive Bayes Wrapper"""
 
-	def __init__(self, alpha):
-		super(NaiveBayes, self).__init__()
+    def __init__(self, alpha):
+        super(NaiveBayes, self).__init__()
 
-		self.classifier() = GaussianNB(alpha=0.1)
-		self.log.debug("Naive Bayes classifier initialized.")
-		self.log.debug('    alpha=%s', alpha)
+        self.classifier() = GaussianNB(alpha=0.1)
+        self.log.debug("Naive Bayes classifier initialized.")
+        self.log.debug('    alpha=%s', alpha)
 
-	def train(self, train_x, train_y):
-		"""
-		Train Naive Bayes classifier
-		"""
-		self.log.info("Training Naive Bayes classifier")
+    def train(self, train_x, train_y):
+        """
+        Train Naive Bayes classifier
+        """
+        self.log.info("Training Naive Bayes classifier")
 
         self.classifier.fit(train_x, train_y)
         self.log.info("Done training Naive Bayes classifier")
