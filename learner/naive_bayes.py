@@ -4,7 +4,7 @@ from sklearn.naive_bayes import GaussianNB
 
 from .learner import Learner
 
-class NaiveBayes(learner):
+class NaiveBayes(Learner):
 
     """Naive Bayes Wrapper"""
 
