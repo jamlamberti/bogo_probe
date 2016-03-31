@@ -5,7 +5,7 @@ from learner import naive_bayes
 
 def test_naive_bayes():
     """Test the Naive Bayes Implementation"""
-    learner = naive_bayes.NaiveBayes
+    learner = naive_bayes.NaiveBayes()
 
     # We will generate a perfectly linearly separable
     # dataset
@@ -23,6 +23,3 @@ def test_naive_bayes():
     assert learner.predict([0, 1]) == 1
     assert all([abs(1. - i) < 1e-5
                 for i in np.sum(learner.predict_proba(data), axis=1)])
-
-if __name__ == '__main__':
-    test_svm()
