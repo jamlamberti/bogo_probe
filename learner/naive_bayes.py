@@ -2,18 +2,17 @@
 
 from sklearn.naive_bayes import GaussianNB
 
-from .learner import learner
+from .learner import Learner
 
 class NaiveBayes(learner):
 
     """Naive Bayes Wrapper"""
 
-    def __init__(self, alpha):
+    def __init__(self):
         super(NaiveBayes, self).__init__()
 
         self.classifier = GaussianNB()
         self.log.debug("Naive Bayes classifier initialized.")
-        #self.log.debug('    alpha=%s', alpha)
 
     def train(self, train_x, train_y):
         """
