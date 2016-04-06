@@ -3,6 +3,7 @@
 import numpy as np
 from learner import naive_bayes
 
+
 def test_naive_bayes():
     """Test the Naive Bayes Implementation"""
     learner = naive_bayes.NaiveBayes()

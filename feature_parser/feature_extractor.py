@@ -6,6 +6,7 @@ import numpy as np
 from collections import Counter
 from .tokenizer import tokenize
 
+
 def load_email(email_file):
     """Load an email"""
     with open(email_file, 'r') as f_handler:
@@ -18,7 +19,7 @@ def parse_dataset(direc, tokenizer):
     tokens = []
     for root, _, files in os.walk(direc):
         tokens.extend([tokenizer(load_email(os.path.join(root, x)))
-            for x in files])
+                       for x in files])
     return tokens
 
 
@@ -30,9 +31,9 @@ def tf_idf(doc, world):
     d_cnt = Counter(doc)
     scores = []
     for tok in d_cnt.keys():
-        tf = d_cnt[tok]*1./len(doc)
-        idf = np.log(len(world) * 1.0/sum([1 for w in world if tok in w]))
-        scores.append([tok, tf*idf])
+        tf = d_cnt[tok] * 1. / len(doc)
+        idf = np.log(len(world) * 1.0 / sum([1 for w in world if tok in w]))
+        scores.append([tok, tf * idf])
 
     return scores
 
@@ -51,16 +52,17 @@ def feature_extractor(ham_toks, spam_toks, max_features):
     # TODO: Should max_features be split evenly or should we do it against
     # a global order
     h_feats = sorted(
-            tf_idf(ham_joined, ham_joined + spam_joined),
-            key=lambda x: x[1],
-            reverse=True)[:max_features/2]
+        tf_idf(ham_joined, ham_joined + spam_joined),
+        key=lambda x: x[1],
+        reverse=True)[:max_features / 2]
 
     s_feats = sorted(
-            tf_idf(spam_joined, ham_joined + spam_joined),
-            key=lambda x: x[1],
-            reverse=True)[:max_features/2]
+        tf_idf(spam_joined, ham_joined + spam_joined),
+        key=lambda x: x[1],
+        reverse=True)[:max_features / 2]
 
     return h_feats, s_feats
+
 
 def feature_parser(ham_dir, spam_dir, max_features):
     """

@@ -16,14 +16,14 @@ def test_feat_class():
 
     h_vec, s_vec = feature_extractor.feature_parser(h_dir, s_dir, 50)
     print h_vec
-    clf= svm.SVM()
-    
+    clf = svm.SVM()
+
     clf.train(
-            h_vec+s_vec,
-            [1 for i in range(len(h_vec))]+[0 for i in range(len(s_vec))])
+        h_vec + s_vec,
+        [1 for i in range(len(h_vec))] + [0 for i in range(len(s_vec))])
 
     pred = clf.predict(h_vec)
     assert sum(pred) == len(pred)
-    
+
     pred = clf.predict(s_vec)
     assert sum(pred) == 0
