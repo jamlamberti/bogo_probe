@@ -1,12 +1,11 @@
-"""A collection of tests for learner.svm"""
+"""A collection of tests for learner.naive_bayes"""
 
 import numpy as np
-from learner import svm
+from learner import naive_bayes
 
-
-def test_svm():
-    """Test the SVM implementation"""
-    learner = svm.SVM()
+def test_naive_bayes():
+    """Test the Naive Bayes Implementation"""
+    learner = naive_bayes.NaiveBayes()
 
     # We will generate a perfectly linearly separable
     # dataset
