@@ -11,7 +11,7 @@ before_install:
 
 install:
     - pip install -r requirements.txt
-    - sudo python -m nltk.downloader -d /usr/local/share/nltk_data stopwords
+    - python -m nltk.downloader -d nltk_data stopwords
 
 script:
     - py.test --cov=.
