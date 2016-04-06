@@ -1,7 +1,8 @@
+"""A collection of tests for common.logger"""
 from common import logger
 
 
-def test_logger():
+def test_get_logger():
     """Test the logger class"""
     import os
     log1 = logger.get_logger("test", "unit_test.log")

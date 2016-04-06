@@ -1,3 +1,4 @@
+"""Log Handler Implementation"""
 import os
 import logging
 
