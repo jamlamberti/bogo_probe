@@ -31,9 +31,9 @@ def tf_idf(doc, world):
     d_cnt = Counter(doc)
     scores = []
     for tok in d_cnt.keys():
-        tf = d_cnt[tok] * 1. / len(doc)
+        tf_score = d_cnt[tok] * 1. / len(doc)
         idf = np.log(len(world) * 1.0 / sum([1 for w in world if tok in w]))
-        scores.append([tok, tf * idf])
+        scores.append([tok, tf_score * idf])
 
     return scores
 
