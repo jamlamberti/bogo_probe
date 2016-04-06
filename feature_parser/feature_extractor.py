@@ -1,3 +1,5 @@
+"""A feature extractor implementation"""
+
 import os
 import email
 import numpy as np
@@ -12,6 +14,7 @@ def load_email(email_file):
 
 
 def parse_dataset(direc, tokenizer):
+    """Parse a dataset, and apply a certain tokenizer"""
     tokens = []
     for root, _, files in os.walk(direc):
         tokens.extend([tokenizer(load_email(os.path.join(root, x)))
@@ -20,6 +23,10 @@ def parse_dataset(direc, tokenizer):
 
 
 def tf_idf(doc, world):
+    """
+    Run tf-idf for all tokens in the document
+    against the world
+    """
     d_cnt = Counter(doc)
     scores = []
     for tok in d_cnt.keys():
@@ -31,13 +38,18 @@ def tf_idf(doc, world):
 
 
 def generate_feat_vec(doc, features):
+    """Generate the feature vector for a given document"""
     d_cnt = Counter(doc)
     return [d_cnt[f] for f in features]
 
 
 def feature_extractor(ham_toks, spam_toks, max_features):
+    """Extract max_features features from ham and spam"""
     ham_joined = sum(ham_toks, [])
     spam_joined = sum(spam_toks, [])
+
+    # TODO: Should max_features be split evenly or should we do it against
+    # a global order
     h_feats = sorted(
             tf_idf(ham_joined, ham_joined + spam_joined),
             key=lambda x: x[1],
@@ -51,11 +63,13 @@ def feature_extractor(ham_toks, spam_toks, max_features):
     return h_feats, s_feats
 
 def feature_parser(ham_dir, spam_dir, max_features):
+    """
+    Returns a feature vector for ham and spam emails of dim max_features
+    """
     ham_toks = parse_dataset(ham_dir, tokenize)
     spam_toks = parse_dataset(spam_dir, tokenize)
     h_feats, s_feats = feature_extractor(ham_toks, spam_toks, max_features)
     features = [i[0] for i in h_feats] + [i[0] for i in s_feats]
-    print h_feats
     h_vec = [generate_feat_vec(doc, features) for doc in ham_toks]
     s_vec = [generate_feat_vec(doc, features) for doc in spam_toks]
 
