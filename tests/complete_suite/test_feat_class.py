@@ -20,7 +20,7 @@ def test_feat_class():
 
     clf.train(
         h_vec + s_vec,
-        [1 for i in range(len(h_vec))] + [0 for i in range(len(s_vec))])
+        [1 for _ in range(len(h_vec))] + [0 for _ in range(len(s_vec))])
 
     pred = clf.predict(h_vec)
     assert sum(pred) == len(pred)
