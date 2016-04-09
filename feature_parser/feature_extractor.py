@@ -2,8 +2,8 @@
 
 import os
 import email
-import numpy as np
 from collections import Counter
+import numpy as np
 from .tokenizer import tokenize
 
 

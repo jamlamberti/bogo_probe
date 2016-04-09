@@ -6,6 +6,7 @@ from learner import svm
 
 
 def test_feat_class():
+    """Test both feature extraction and classification"""
     data_config = config.Section('data')
     root = data_config.get('data-small')
     s_dir = os.path.join(root, 'spam')
