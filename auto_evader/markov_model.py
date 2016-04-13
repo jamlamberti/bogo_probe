@@ -6,6 +6,7 @@ from textblob import TextBlob
 
 
 class Markov(object):
+
     """Markov class for building simple models over sentences"""
     memory = defaultdict(list)
     separator = ' '
@@ -88,7 +89,7 @@ class Markov(object):
 
         def sort_by_cnt(lis):
             """Sort by # of occurrences, then alphabetically"""
-            #return filter(
+            # return filter(
             #    lambda s: len(s) > 0,
             #    set(sorted(
             #        lis,
