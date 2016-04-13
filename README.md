@@ -5,4 +5,4 @@
 [![codecov.io](https://codecov.io/github/jamlamberti/bogo_probe/coverage.svg?branch=master)](https://codecov.io/github/jamlamberti/bogo_probe?branch=master)
 
 
-BogoProbe is a generatic surrogate model builder using active probing.
+BogoProbe is a generic surrogate model builder using active probing.
