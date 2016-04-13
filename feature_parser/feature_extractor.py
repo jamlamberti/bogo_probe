@@ -34,7 +34,6 @@ def tf_idf(doc, world):
         tf_score = d_cnt[tok] * 1. / len(doc)
         idf = np.log(len(world) * 1.0 / sum([1 for w in world if tok in w]))
         scores.append([tok, tf_score * idf])
-
     return scores
 
 
@@ -51,13 +50,16 @@ def feature_extractor(ham_toks, spam_toks, max_features):
 
     # TODO: Should max_features be split evenly or should we do it against
     # a global order
+
+    world = [ham_joined, spam_joined]
+
     h_feats = sorted(
-        tf_idf(ham_joined, ham_joined + spam_joined),
+        tf_idf(ham_joined, world),
         key=lambda x: x[1],
         reverse=True)[:max_features / 2]
 
     s_feats = sorted(
-        tf_idf(spam_joined, ham_joined + spam_joined),
+        tf_idf(spam_joined, world),
         key=lambda x: x[1],
         reverse=True)[:max_features / 2]
 
@@ -70,8 +72,10 @@ def feature_parser(ham_dir, spam_dir, max_features):
     """
     ham_toks = parse_dataset(ham_dir, tokenize)
     spam_toks = parse_dataset(spam_dir, tokenize)
+
     h_feats, s_feats = feature_extractor(ham_toks, spam_toks, max_features)
     features = [i[0] for i in h_feats] + [i[0] for i in s_feats]
+
     h_vec = [generate_feat_vec(doc, features) for doc in ham_toks]
     s_vec = [generate_feat_vec(doc, features) for doc in spam_toks]
 
