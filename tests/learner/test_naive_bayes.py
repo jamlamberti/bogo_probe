@@ -1,8 +1,9 @@
 """A collection of tests for learner.naive_bayes"""
 
+import sys
+sys.path.append("../..")
 import numpy as np
 from learner import naive_bayes
-
 
 def test_naive_bayes():
     """Test the Naive Bayes Implementation"""
