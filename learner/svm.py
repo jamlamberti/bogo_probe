@@ -46,6 +46,7 @@ class SVM(Learner):
         Train the SVM classifier
         """
         self.log.info("Training SVM classifier")
+        train_y = np.array(train_y)
         if len(train_y.shape) == 2:
             self.classifier.fit(train_x, np.asarray(train_y).reshape(-1))
         else:
