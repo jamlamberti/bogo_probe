@@ -2,6 +2,7 @@
 import numpy as np
 from common import ml_util
 
+
 def test_cross_validate():
     """Unit test for cv code"""
     size = 1000
@@ -14,4 +15,3 @@ def test_cross_validate():
     assert size == sum([y.shape[0] for y in y_bins])
     assert len(y_bins) == folds
     assert len(x_bins) == folds
-
