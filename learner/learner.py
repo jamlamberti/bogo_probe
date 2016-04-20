@@ -24,9 +24,7 @@ class Learner(object):
         logging_config = config.Section('logging')
         self.log = logger.get_logger(
             'learner',
-            join(
-                abspath(logging_config.get('log-dir')),
-                'learner.log'))
+            join(abspath(logging_config.get('log-dir')), 'learner.log'))
 
     def train(self, train_x, train_y):
         """
