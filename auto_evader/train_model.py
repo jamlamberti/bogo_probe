@@ -6,9 +6,9 @@ from .markov_model import Markov
 
 def get_sentences(sample):
     """Helper function to extract sentences"""
-    data = ''
-    with open(sample, 'r') as f_handle:
-        data = f_handle.read().decode('ascii', 'ignore')
+    data = sample
+    #with open(sample, 'r') as f_handle:
+     #   data = f_handle.read().decode('ascii', 'ignore')
 
     blob = TextBlob(data.replace('\n', ' ').replace(
         '"', '').replace('--', ' '))  # .replace('\'', ''))

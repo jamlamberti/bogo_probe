@@ -15,10 +15,13 @@ class Markov(object):
     def __init__(self, multi=2):
         self.multi_hop_param = multi
 
+
     def learn(self, txt):
         """Train the model over a sentence"""
         for key, value in self.break_text(txt):
             self.memory[key].append(value)
+
+
 
     def ask(self, seed=None):
         """Generate a sentence"""
@@ -36,6 +39,8 @@ class Markov(object):
                 ret.append(link[0])
                 seed = link[1]
         return self.separator.join(ret)
+
+
 
     def tokenize(self, txt):
         """Tokenize a sentence"""
