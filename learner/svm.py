@@ -1,5 +1,6 @@
 """An SVM implementation"""
 
+import numpy as np
 import sklearn.svm
 
 from .learner import Learner
@@ -45,8 +46,10 @@ class SVM(Learner):
         Train the SVM classifier
         """
         self.log.info("Training SVM classifier")
-
-        self.classifier.fit(train_x, train_y)
+        if len(train_y.shape) == 2:
+            self.classifier.fit(train_x, np.asarray(train_y).reshape(-1))
+        else:
+            self.classifier.fit(train_x, train_y)
         self.log.info("Done training SVM classifier")
 
     def predict(self, test_x):

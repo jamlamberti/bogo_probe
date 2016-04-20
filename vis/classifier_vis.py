@@ -26,4 +26,6 @@ def classifier_vis(truth, expected, thresh=0.02, out_file='out.png', frame_name=
     ax.set_ylabel('$\\mathrm{E}[x]$')
     plt.tight_layout()
     plt.savefig(out_file)
+    fig.clf()
+    plt.close(fig)
     plt.clf()
