@@ -1,10 +1,8 @@
 """Surrogate model using CV"""
 
-import os
 import numpy as np
-from common import config, ml_util
+from common import ml_util
 from learner import svm
-from feature_parser import feature_extractor
 from vis import classifier_vis
 
 
@@ -60,7 +58,7 @@ def drive(iterations=5000):
 
         target_class = (int(round(prob_orig_ml[worst])) + 1) % 2
         train_hat = np.concatenate((train_hat, probe_x[worst, :]), axis=0)
-        
+
         train_labs = np.concatenate(
             (train_labs, np.asmatrix(target_class)), axis=0)
 
