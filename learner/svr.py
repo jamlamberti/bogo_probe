@@ -32,7 +32,6 @@ class SVR(Learner):
             epsilon=epsilon,
             degree=degree,
             # gamma=gamma,
-            probability=True,
             coef0=coef0,
         )
         self.log.debug("Initialized an SVR classifier with:")
