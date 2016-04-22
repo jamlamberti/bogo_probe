@@ -1,8 +1,8 @@
 """Run a regression over the dataset"""
 
+import os
 import numpy as np
 from common import ml_util
-from learner import svr, svm
 from vis import classifier_vis
 
 
@@ -17,7 +17,8 @@ def generate_figure(cnt, orig, ded, eval_x, out_dir):
     classifier_vis.classifier_vis(
         pred_orig,
         pred_ded,
-        out_file=os.path.join(out_dir, 'correlation%s.png'%(str(cnt).zfill(4))),
+        out_file=os.path.join(
+            out_dir, 'correlation%s.png' % (str(cnt).zfill(4))),
         frame_name=cnt)
 
 
@@ -25,8 +26,8 @@ def main(black_box, surrogate, training_data='data-small', out_dir=None):
     """Driver to generate the deduced ML"""
     x_bins, y_bins = ml_util.load_data(training_data)
 
-    #original_ml_driver = svm.SVM()
-    #deduced_ml_driver = svr.SVR(kernel='rbf', epsilon=0.0001)
+    # original_ml_driver = svm.SVM()
+    # deduced_ml_driver = svr.SVR(kernel='rbf', epsilon=0.0001)
 
     black_box.train(x_bins[0], y_bins[0])
 
