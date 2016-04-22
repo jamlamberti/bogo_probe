@@ -18,3 +18,7 @@ def cross_validate(train_x, train_y, folds=10):
         y_fold[i] = np.concatenate(y_fold[i], axis=0)
 
     return x_fold, y_fold
+
+def loss_01(pred1, pred2):
+    """Compute 01 Loss"""
+    return np.sum(np.abs(pred1-pred2))
