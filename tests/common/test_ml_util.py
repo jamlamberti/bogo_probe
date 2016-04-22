@@ -24,3 +24,19 @@ def test_loss_01():
 
     assert ml_util.loss_01(pred1, pred2) == 3
     assert ml_util.loss_01(pred2, pred1) == 3
+
+
+def test_load_data():
+    """Test the load data and CV methods"""
+    num_feats = 10
+    folds = 5
+    x_bins, y_bins = ml_util.load_data(
+        "data-small",
+        num_feats=num_feats,
+        folds=folds)
+
+    assert len(y_bins) == folds
+    assert len(x_bins) == folds
+    assert all([x.shape[1] == num_feats for x in x_bins])
+    assert all([x_bins[i].shape[0] == y_bins[i].shape[0]
+                for i in range(folds)])

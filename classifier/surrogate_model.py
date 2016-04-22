@@ -72,10 +72,5 @@ def drive(iterations=5000):
         x_bins[-1])
 
 
-def main():
-    """Run the model"""
-    # options to be added later
+if __name__ == '__main__':
     drive()
-
-if __name__ == "__main__":
-    main()
