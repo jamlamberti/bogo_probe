@@ -10,12 +10,12 @@ def test_svr():
 
     # We will generate a perfectly linearly separable
     # dataset
-    
+
     axis = np.linspace(0, 1, num=20)
     xarr, yarr = np.meshgrid(axis, axis)
     data = []
     target = []
-    
+
     for i in range(xarr.shape[0]):
         for j in range(xarr.shape[1]):
             data.append([xarr[i, j], yarr[i, j]])
