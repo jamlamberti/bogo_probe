@@ -5,7 +5,12 @@ matplotlib.use('Agg')  # nopep8
 import matplotlib.pyplot as plt
 
 
-def classifier_vis(truth, expected, thresh=0.02, out_file='out.png', frame_name='Ouput Frame'):
+def classifier_vis(
+    truth,
+    expected,
+    thresh=0.02,
+    out_file='out.png',
+        frame_name='Ouput Frame'):
     """truth is the black-box model, expected is the surrogate"""
     # slope, intercept, r_value, p_value, std_err
     # = scipy.stats.linregress(truth, expected)
