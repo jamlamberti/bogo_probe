@@ -65,6 +65,5 @@ class SVR(Learner):
         """
         Return predicted probabilities from SVR classifier
         """
-
-        self.log.info("Computing SVR probabilities")
-        return self.classifier.predict_proba(test_x)
+        # Should we wrap this and return [predict 1-predict]
+        raise NotImplementedError("SVR does not support probabilities")

@@ -1,6 +1,7 @@
 """A collection of tests for learner.svr"""
 
 import numpy as np
+import pytest
 from learner import svr
 
 
@@ -29,3 +30,6 @@ def test_svr():
         assert abs(learner.predict([1, 0]) - 1) < 1e-5
         assert abs(learner.predict([0, 1]) - 1) < 1e-5
         target = np.asmatrix(target)
+
+    with pytest.raises(NotImplementedError):
+        learner.predict_proba([1, 0])
