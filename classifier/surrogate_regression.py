@@ -47,7 +47,3 @@ def main(black_box, surrogate, training_data='data-small', out_dir=None):
         surrogate,
         x_bins[-1],
         out_dir)
-
-
-if __name__ == '__main__':
-    main()
