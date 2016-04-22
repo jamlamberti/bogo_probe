@@ -4,6 +4,7 @@ import random
 import numpy as np
 from . import config
 from feature_parser import feature_extractor
+from vis import classifier_vis
 
 
 def cross_validate(train_x, train_y, folds=10):
@@ -54,3 +55,16 @@ def load_data(data_path, num_feats=500, folds=10):
         axis=0)
 
     return cross_validate(x_data, y_data, folds)
+
+
+def generate_figure(cnt, pred_orig, pred_ded, out_dir):
+    """Generate a frame"""
+    if out_dir is None:
+        return
+
+    classifier_vis.classifier_vis(
+        pred_orig,
+        pred_ded,
+        out_file=os.path.join(
+            out_dir, 'correlation%s.png' % (str(cnt).zfill(4))),
+        frame_name=cnt)

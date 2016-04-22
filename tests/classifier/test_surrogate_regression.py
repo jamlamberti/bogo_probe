@@ -1,3 +1,5 @@
+"""Collection of tests for classifier.surrogate_regression"""
+
 from classifier import surrogate_regression
 from learner import svr, svm
 

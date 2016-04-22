@@ -1,25 +1,7 @@
 """Run a regression over the dataset"""
 
-import os
 import numpy as np
 from common import ml_util
-from vis import classifier_vis
-
-
-def generate_figure(cnt, orig, ded, eval_x, out_dir):
-    """Generate a frame"""
-    if out_dir is None:
-        return
-
-    pred_orig = orig.predict_proba(eval_x)[:, 0]
-    pred_ded = np.minimum(np.maximum(0.0, ded.predict(eval_x)), 1.0)
-
-    classifier_vis.classifier_vis(
-        pred_orig,
-        pred_ded,
-        out_file=os.path.join(
-            out_dir, 'correlation%s.png' % (str(cnt).zfill(4))),
-        frame_name=cnt)
 
 
 def main(black_box, surrogate, training_data='data-small', out_dir=None):
@@ -39,11 +21,14 @@ def main(black_box, surrogate, training_data='data-small', out_dir=None):
     for i in range(probe_x.shape[0], probe_x.shape[0] + 1):
         prob_orig_ml = black_box.predict_proba(probe_x)[:i, 0]
         surrogate.train(probe_x[:i, :], prob_orig_ml)
-        generate_figure(i, black_box, surrogate, x_bins[-1], out_dir)
+        ml_util.generate_figure(
+            i,
+            black_box.predict_proba(x_bins[-1])[:, 0],
+            surrogate.predict(x_bins[-1]),
+            out_dir)
 
-    generate_figure(
+    ml_util.generate_figure(
         probe_x.shape[0] + 1,
-        black_box,
-        surrogate,
-        x_bins[-1],
+        black_box.predict_proba(x_bins[-1])[:, 0],
+        surrogate.predict(x_bins[-1]),
         out_dir)

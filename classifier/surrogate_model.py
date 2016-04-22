@@ -2,34 +2,23 @@
 
 import numpy as np
 from common import ml_util
-from learner import svm
-from vis import classifier_vis
 
 
-def generate_figure(cnt, orig, ded, eval_x):
-    """Evaluate the model and generate a frame"""
-    pred_orig = orig.predict_proba(eval_x)[:, 0]
-    pred_ded = ded.predict_proba(eval_x)[:, 0]
-
-    classifier_vis.classifier_vis(
-        pred_orig,
-        pred_ded,
-        out_file='gif_folder/correlation%s.png' % (str(cnt).zfill(4)),
-        frame_name=cnt)
-
-
-def drive(iterations=5000):
+def main(
+        black_box,
+        surrogate,
+        training_data='data-small',
+        out_dir=None,
+        threshold=0.1,
+        iterations=500):
     """Driver to generate the deduced ML"""
-    x_bins, y_bins = ml_util.load_data('data-small', 500, 5)
-
-    original_ml_driver = svm.SVM()
-    deduced_ml_driver = svm.SVM()
+    x_bins, y_bins = ml_util.load_data(training_data, 500, 5)
 
     # Train the blackbox model
-    original_ml_driver.train(x_bins[0], y_bins[0])
+    black_box.train(x_bins[0], y_bins[0])
 
     # Train surrogate model
-    deduced_ml_driver.train(x_bins[1], y_bins[1])
+    surrogate.train(x_bins[1], y_bins[1])
 
     train_hat = x_bins[1]
     train_labs = y_bins[1]
@@ -42,18 +31,18 @@ def drive(iterations=5000):
 
     for iteration in range(iterations):
 
-        prob_orig_ml = original_ml_driver.predict_proba(probe_x)[:, 0]
-        prob_ded_ml = deduced_ml_driver.predict_proba(probe_x)[:, 0]
+        prob_orig_ml = black_box.predict_proba(probe_x)[:, 0]
+        prob_ded_ml = surrogate.predict_proba(probe_x)[:, 0]
         scores = np.abs(prob_orig_ml - prob_ded_ml)
         worst = np.argmax(scores)
 
-        generate_figure(
+        ml_util.generate_figure(
             iteration,
-            original_ml_driver,
-            deduced_ml_driver,
-            x_bins[-1])
+            black_box.predict_proba(x_bins[-1])[:, 0],
+            surrogate.predict_proba(x_bins[-1])[:, 0],
+            out_dir)
 
-        if scores[worst] < 0.1:
+        if scores[worst] < threshold:
             break
 
         target_class = (int(round(prob_orig_ml[worst])) + 1) % 2
@@ -63,14 +52,10 @@ def drive(iterations=5000):
             (train_labs, np.asmatrix(target_class)), axis=0)
 
         # Retrain
-        deduced_ml_driver.train(train_hat, train_labs)
+        surrogate.train(train_hat, train_labs)
 
-    generate_figure(
+    ml_util.generate_figure(
         iterations,
-        original_ml_driver,
-        deduced_ml_driver,
-        x_bins[-1])
-
-
-if __name__ == '__main__':
-    drive(100)
+        black_box,
+        surrogate,
+        out_dir)
