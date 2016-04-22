@@ -1,12 +1,8 @@
 """Surrogate model using CV"""
 
 import os
-import sys
-import time
-
 import numpy as np
 from common import config, ml_util
-from learner import naive_bayes
 from learner import svm
 from feature_parser import feature_extractor
 from vis import classifier_vis
@@ -14,12 +10,12 @@ from vis import classifier_vis
 
 def generate_figure(cnt, orig, ded, eval_x):
     """Evaluate the model and generate a frame"""
-    x = orig.predict_proba(eval_x)[:, 0]
-    y = ded.predict_proba(eval_x)[:, 0]
+    pred_orig = orig.predict_proba(eval_x)[:, 0]
+    pred_ded = ded.predict_proba(eval_x)[:, 0]
 
     classifier_vis.classifier_vis(
-        x,
-        y,
+        pred_orig,
+        pred_ded,
         out_file='gif_folder/correlation%s.png' % (str(cnt).zfill(4)),
         frame_name=cnt)
 
@@ -57,7 +53,9 @@ def drive():
 
     # Active Probing starts here - call activeProbing iteratively
     probe_x = np.concatenate(x_bins[2:-1], axis=0)
-    probe_y = np.concatenate(y_bins[2:-1], axis=0)
+
+    # We don't really care about the class label
+    # probe_y = np.concatenate(y_bins[2:-1], axis=0)
 
     for iteration in range(5000):
 
@@ -81,7 +79,10 @@ def drive():
         deduced_ml_driver.train(train_hat, train_labs)
 
     generate_figure(
-        iteration, original_ml_driver, deduced_ml_driver, x_bins[-1])
+        5001,
+        original_ml_driver,
+        deduced_ml_driver,
+        x_bins[-1])
 
 
 def main():
