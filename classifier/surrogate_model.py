@@ -56,6 +56,6 @@ def main(
 
     ml_util.generate_figure(
         iterations,
-        black_box,
-        surrogate,
+        black_box.predict_proba(x_bins[-1])[:, 0],
+        surrogate.predict_proba(x_bins[-1])[:, 0],
         out_dir)
