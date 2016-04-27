@@ -40,6 +40,11 @@ def compute_precision(pred1, pred2):
     return sklearn.metrics.precision_score(pred1, pred2)
 
 
+def compute_recall(pred1, pred2):
+    """Compute classifier recall"""
+    return sklearn.metrics.recall_score(pred1, pred2)
+
+
 def compute_fscore(pred1, pred2):
     """Compute F1 Score"""
     return sklearn.metrics.f1_score(pred1, pred2)
