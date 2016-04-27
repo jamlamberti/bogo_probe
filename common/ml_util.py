@@ -2,6 +2,7 @@
 import os
 import random
 import numpy as np
+import sklearn.metrics
 from . import config
 from feature_parser import feature_extractor
 from vis import classifier_vis
@@ -27,6 +28,21 @@ def cross_validate(train_x, train_y, folds=10):
 def loss_01(pred1, pred2):
     """Compute 01 Loss"""
     return np.sum(np.abs(pred1 - pred2))
+
+
+def compute_accuracy(pred1, pred2):
+    """Compute classifier Accuracy"""
+    return sklearn.metrics.accuracy_score(pred1, pred2, normalized=True)
+
+
+def compute_precision(pred1, pred2):
+    """Compute classifier precision"""
+    return sklearn.metrics.precision_score(pred1, pred2)
+
+
+def compute_fscore(pred1, pred2):
+    """Compute F1 Score"""
+    return sklearn.metrics.f1_score(pred1, pred2)
 
 
 def load_data(data_path, num_feats=500, folds=10):
