@@ -25,6 +25,7 @@ def classifier_vis(
     ax.plot([0.5 + thresh, 0.5 + thresh], [0, 1], 'g--')
     ax.scatter(truth, expected)
     ax.plot([0, 1], [intercept, slope + intercept])
+    ax.set_ylim([-0.2, 1.2])
     ax.text(0.1, 1.1, 'Frame - %s' % frame_name)
     ax.text(0.1, 1.05, '$r^2$ = %0.4f' % r_value**2)
     ax.set_xlabel('$p$')
