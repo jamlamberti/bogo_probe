@@ -32,7 +32,7 @@ def loss_01(pred1, pred2):
 
 def compute_accuracy(pred1, pred2):
     """Compute classifier Accuracy"""
-    return sklearn.metrics.accuracy_score(pred1, pred2, normalized=True)
+    return sklearn.metrics.accuracy_score(pred1, pred2)
 
 
 def compute_precision(pred1, pred2):
