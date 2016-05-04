@@ -37,6 +37,23 @@ def tf_idf(doc, world):
     return scores
 
 
+def word_counter(ham_dir, spam_dir):
+    """
+    Count the tokens similiar to SB...
+    This works well for a Bayesian Classifier, but not so hot for others
+    """
+    ham_toks = parse_dataset(ham_dir, tokenize)
+    spam_toks = parse_dataset(spam_dir, tokenize)
+    global_tokens = set().union(*ham_toks).union(*spam_toks)
+
+    # Compute the overall counts
+    tokens = {tok: [
+        sum([x.count(tok) for x in ham_toks]),
+        sum([x.count(tok) for x in spam_toks])] for tok in global_tokens}
+
+    return tokens
+
+
 def generate_feat_vec(doc, features):
     """Generate the feature vector for a given document"""
     d_cnt = Counter(doc)
@@ -80,3 +97,6 @@ def feature_parser(ham_dir, spam_dir, max_features):
     s_vec = [generate_feat_vec(doc, features) for doc in spam_toks]
 
     return h_vec, s_vec
+
+if __name__ == '__main__':
+    word_counter('data/test/ham/', 'data/test/spam')
