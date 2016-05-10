@@ -12,7 +12,7 @@ class Markov(object):
     separator = ' '
     end_of_sentence = ['?', '.', '!']
 
-    def __init__(self, multi=2):
+    def __init__(self, multi=5):
         self.multi_hop_param = multi
 
 
@@ -28,16 +28,23 @@ class Markov(object):
         ret = []
         if not seed:
             seed = self.get_initial()
+        #cnt = 0;
         while True:
             link = self.step(seed)
             if link is None:
+                ##ret[-1] = ret[-1] + '.'
+                #if cnt > 100:
                 break
+                #seed = self.get_initial()
             elif link in self.end_of_sentence:
                 ret[-1] = ret[-1] + link
-                break
+                #if cnt > 100:
+                 #   break
+                #seed = self.get_initial()
             else:
                 ret.append(link[0])
                 seed = link[1]
+            #cnt += 1
         return self.separator.join(ret)
 
 
