@@ -1,4 +1,4 @@
-"""Utility to query online spam assasin instances for email scores"""
+"""Utility to query online spam assassin instances for email scores"""
 import sys
 import os
 # import time
